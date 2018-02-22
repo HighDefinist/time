@@ -3,7 +3,7 @@
 
 ### Requirements
 
-- The ```<chrono>``` library (part of the C++ 11 standard)
+- C++ 11, including the ```<chrono>``` library
 - [CMake](https://cmake.org/) (only necessary for building the example)
 
 ### Installation
