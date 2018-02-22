@@ -6,8 +6,8 @@ using namespace std::mz;
 
 int main() {
   // Measure the duration of something
+  long long a = 0;
   {
-    int a = 0;
     auto t1=bench1([&] { // Execute once
       for(auto i:range(1000))a += i;
     });
@@ -24,7 +24,6 @@ int main() {
 
    // Benchmarking: Average over multiple separate executions
   {
-    int a = 0;
     Tbench b;
     for(auto i:range(1000)) {
       b.Run([&] {
@@ -32,6 +31,7 @@ int main() {
       });
     }
     printf("TBench: tot=%gns; avg=%gns; min=%gns; max=%gns; last=%gns\n",b.dur_tot()*1e9,b.dur_avg()*1e9,b.dur_min*1e9,b.dur_max*1e9,b.dur_min*1e9);
+    printf("Total execution result: %lld (should be 10232164093500)\n",a);
   }
 }
 
