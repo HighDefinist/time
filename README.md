@@ -13,7 +13,8 @@
 
 ### Tested on
 
-- Visual Studio 2017
+- Windows 10: Visual Studio 2017
+- Fedora Linux: Visual Studio Code
  
 ### Download 
 
