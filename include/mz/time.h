@@ -7,8 +7,14 @@
 #endif
 //#include "base.h"
 
+#define MZ_max(a,b)            (((a) > (b)) ? (a) : (b))
+#define MZ_min(a,b)            (((a) < (b)) ? (a) : (b))
+#define MZ_Ctypecopy(name) typedef const name C##name
+#define MZ_Ctypedef(type,name) typedef type name; MZ_Ctypecopy(name)
+
 namespace std {
   namespace mz {
+    MZ_Ctypedef(unsigned long long, ui64);
 
     // Manages timing and profiling
 #  ifdef _WIN32
@@ -54,14 +60,14 @@ namespace std {
       Ttimer(): time_(0),ison(false),time(time_),enabled(true) {}
       bool Start() {
         if(!enabled) return false;
-        if(ison) ifeEX(throw invalid_argument("Ttimer::Start(): Timer was already running!"),return false);
+        if (ison) throw invalid_argument("Ttimer::Start(): Timer was already running!");
         ison=true;
         a=HighResClock::now();
         return true;
       }
       void Stop() {
         if(!enabled) return;
-        db dur=to_s(HighResClock::now()-a);
+        double dur=to_s(HighResClock::now()-a);
         if(ison) {
           ison=false;
           time_+=dur;
@@ -72,7 +78,7 @@ namespace std {
         f();
         Stop();
       }
-      void Reset(db newtime=0) {
+      void Reset(double newtime=0) {
         if(ison) Stop();
         time_=newtime;
       }
@@ -82,10 +88,10 @@ namespace std {
       ui64 N_;
       double t_min_,t_max_,t_last_;
     public:
-      double dur_avg() { return time_/(db)N_; }
+      double dur_avg() { return time_/(double)N_; }
       double dur_tot() { return time_; }
       const ui64& N;
-      const db &dur_min,&dur_max,&dur_last;
+      const double &dur_min,&dur_max,&dur_last;
       Tbench(): N(N_),dur_min(t_min_),dur_max(t_max_),dur_last(t_last_) { Reset(); }
       void Reset() {
         if(ison)Stop();
@@ -98,13 +104,13 @@ namespace std {
       }
       void Stop() {
         if(!enabled) return;
-        db dur=to_s(HighResClock::now()-a);
+        double dur=to_s(HighResClock::now()-a);
         if(ison) {
           ison=false;
           t_last_=dur;
           time_+=dur;
-          t_min_=M_min(t_min_,dur);
-          t_max_=M_max(t_max_,dur);
+          t_min_=MZ_min(t_min_,dur);
+          t_max_=MZ_max(t_max_,dur);
           N_++;
         }
       }
@@ -113,31 +119,31 @@ namespace std {
         f();
         Stop();
       }
-      void AddTime(db DurationInSeconds) {
+      void AddTime(double DurationInSeconds) {
         t_last_ = DurationInSeconds;
         time_ += DurationInSeconds;
-        t_min_ = M_min(t_min_,DurationInSeconds);
-        t_max_ = M_max(t_max_,DurationInSeconds);
+        t_min_ = MZ_min(t_min_,DurationInSeconds);
+        t_max_ = MZ_max(t_max_,DurationInSeconds);
         N_++;
       }
     };
 
     // Execute once
-    inline db bench1(function<void()> f) {
+    inline double bench1(function<void()> f) {
       auto start=HighResClock::now();
       f();
       return to_s(HighResClock::now()-start);
     }
 
     // Execute N times and average
-    inline db benchN(int N,function<void()> f) {
+    inline double benchN(int N,function<void()> f) {
       auto start=HighResClock::now();
       for(int i=0; i<N; i++)f();
       return to_s(HighResClock::now()-start)/N;
     }
 
     // Execute until time "t" is elapsed, then average
-    inline db benchT(db t,function<void()> f) {
+    inline double benchT(double t,function<void()> f) {
       auto start=HighResClock::now();
       auto now=start;
       int N=0;
