@@ -18,7 +18,7 @@
  
 ### Download 
 
-You can download the latest version of *time* by cloning the GitHub repository.
+You can download the latest version of *time* by cloning the GitHub repository:
 
 	git clone https://github.com/Solenism/time.git
 	
