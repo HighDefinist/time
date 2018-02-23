@@ -24,9 +24,9 @@ You can download the latest version of *time* by cloning the GitHub repository:
 	
 ### Usage
 
-Execute a function once, and return the elapsed time in seconds (as double):
+Execute a function once, and return the elapsed time in seconds:
 
-	bench1([&] { 
+	double ElapsedTime = bench1([&] { 
 	  // Insert code to benchmark here
 	});
 
