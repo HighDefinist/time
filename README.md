@@ -24,6 +24,13 @@ You can download the latest version of *time* by cloning the GitHub repository:
 	
 ### Usage
 
-Take a look at the example file:
+Execute a function once, and return the elapsed time in seconds (as double):
+
+	bench1([&] { 
+	  // Insert code to benchmark here
+	});
+
+
+Take a look at the example file for the other available functions and classes:
 
 	example\simple\time_demo.cpp
