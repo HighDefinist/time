@@ -3,7 +3,7 @@
 
 ### Requirements
 
-- The ```<chrono>``` library (part of the C++ 11 standard)
+- C++11, including the ```<chrono>``` library
 - [CMake](https://cmake.org/) (only necessary for building the example)
 
 ### Installation
@@ -14,15 +14,24 @@
 ### Tested on
 
 - Visual Studio 2017
- 
+- GCC 7.3.1
+- Clang 5.0.1
+
 ### Download 
 
-You can download the latest version of *time* by cloning the GitHub repository.
+You can download the latest version of *time* by cloning the GitHub repository:
 
-	git clone https://github.com/Solenism/time.git
+	git clone https://github.com/HighDefinist/time.git
 	
 ### Usage
 
-Take a look at the example file:
+Execute a function once, and return the elapsed time in seconds:
+
+	double ElapsedTime = bench1([&] { 
+	  // Insert code to benchmark here
+	});
+
+
+Take a look at the example file for the other available functions and classes:
 
 	example\simple\time_demo.cpp
