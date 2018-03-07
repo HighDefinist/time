@@ -5,7 +5,9 @@
 //#include "mz/base.h"
 #include <iterator>
 #include <type_traits>
-#define __PUalso 
+#ifndef __PUalso
+#  define __PUalso 
+#endif
 
 namespace util {
   namespace lang {

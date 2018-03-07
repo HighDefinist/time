@@ -1,6 +1,6 @@
-#include "mz/range.hpp"
+#include "range.hpp"
 #include "mz/time.h"
-//#include "mz/base1.h"
+
 using namespace std;
 using namespace std::mz;
 
@@ -26,6 +26,7 @@ int main() {
   {
     Tbench b;
     for(auto i:range(1000)) {
+      (void) i;
       b.Run([&] {
         for(auto i:range(1000))a += i;
       });

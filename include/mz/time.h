@@ -2,6 +2,7 @@
 #pragma once
 #include <chrono>
 #include <functional>
+#include <stdexcept>
 #ifdef _WIN32
 #  include <windows.h>
 #endif
