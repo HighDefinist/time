@@ -58,7 +58,7 @@ namespace std {
     public:
       bool enabled;
       const double& time;
-      Ttimer(): time_(0),ison(false),time(time_),enabled(true) {}
+      Ttimer(): time_(0),ison(false),enabled(true),time(time_) {}
       bool Start() {
         if(!enabled) return false;
         if (ison) throw invalid_argument("Ttimer::Start(): Timer was already running!");
@@ -89,7 +89,7 @@ namespace std {
       ui64 N_;
       double t_min_,t_max_,t_last_;
     public:
-      double dur_avg() { return time_/(double)N_; }
+      double dur_avg() { return time_/static_cast<double>(N_); }
       double dur_tot() { return time_; }
       const ui64& N;
       const double &dur_min,&dur_max,&dur_last;

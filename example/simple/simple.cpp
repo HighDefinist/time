@@ -26,7 +26,7 @@ int main() {
     for(auto i:range(1000)) {
       (void) i;
       b.Run([&] {
-        for(auto i:range(1000))a += i;
+        for(auto j:range(1000))a += j;
       });
     }
     printf("TBench: tot=%gns; avg=%gns; min=%gns; max=%gns; last=%gns\n",b.dur_tot()*1e9,b.dur_avg()*1e9,b.dur_min*1e9,b.dur_max*1e9,b.dur_min*1e9);

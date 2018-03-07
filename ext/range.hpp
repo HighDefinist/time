@@ -15,7 +15,7 @@ namespace util {
 
       template <typename T>
       struct range_iter_base: std::iterator<std::input_iterator_tag,T> {
-        __PUalso range_iter_base(T current): current(current) {}
+        __PUalso range_iter_base(T current_): current(current_) {}
 
         __PUalso T operator *() const { return current; }
 
@@ -49,13 +49,13 @@ namespace util {
     template <typename T>
     struct range_proxy {
       struct iter: detail::range_iter_base<T> {
-        __PUalso iter(T current): detail::range_iter_base<T>(current) {}
+        __PUalso iter(T current_): detail::range_iter_base<T>(current_) {}
       };
 
       struct step_range_proxy {
         struct iter: detail::range_iter_base<T> {
-          __PUalso iter(T current,T step)
-            : detail::range_iter_base<T>(current),step(step) {}
+          __PUalso iter(T current_,T step_)
+            : detail::range_iter_base<T>(current_),step(step_) {}
 
           using detail::range_iter_base<T>::current;
 
@@ -123,8 +123,8 @@ namespace util {
 
       struct step_range_proxy {
         struct iter: detail::range_iter_base<T> {
-          __PUalso iter(T current = T(),T step = T())
-            : detail::range_iter_base<T>(current),step(step) {}
+          __PUalso iter(T current_ = T(),T step_ = T())
+            : detail::range_iter_base<T>(current_),step(step_) {}
 
           using detail::range_iter_base<T>::current;
 
@@ -178,7 +178,7 @@ namespace util {
 
     template <typename T>
     __PUalso range_proxy<T> range(T end) {
-      return{(T)0, end};
+      return{static_cast<T>(0), end};
     }
 
     //template <typename T>
